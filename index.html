@@ -4,17 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>متجر نور الصالحين للزيوت الطبية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c5f2d;
-            --secondary-color: #97bc62;
-            --accent-color: #ffc107;
-            --bg-color: #f8f9fa;
-            --text-color: #333;
-            --card-bg: #ffffff;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
+            --primary-dark: #1a472a;
+            --primary: #2d6a4f;
+            --primary-light: #52b788;
+            --secondary: #d8f3dc;
+            --accent: #d4a373;
+            --accent-light: #faedcd;
+            --bg-dark: #081c15;
+            --bg-light: #f8faf9;
+            --text-dark: #1b4332;
+            --text-light: #ffffff;
+            --warning: #e63946;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+            --gradient: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -25,32 +33,99 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(82, 183, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 163, 115, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 2rem 1rem;
+            background: var(--gradient);
+            color: var(--text-light);
+            padding: 3rem 1rem;
             text-align: center;
-            box-shadow: var(--shadow);
-            position: sticky;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
             top: 0;
-            z-index: 100;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
-            font-weight: 800;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: -1px;
         }
 
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header .tagline {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Category Info Bar */
+        .category-info {
+            background: var(--accent-light);
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 15px;
+            border-right: 5px solid var(--accent);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .category-info h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .category-info p {
+            color: var(--text-dark);
+            font-size: 0.95rem;
         }
 
         /* Search and Filter */
@@ -60,29 +135,43 @@
             padding: 0 1rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
+            align-items: center;
         }
 
         .search-box {
             flex: 1;
-            min-width: 280px;
+            min-width: 300px;
+            max-width: 500px;
             position: relative;
         }
 
         .search-box input {
             width: 100%;
-            padding: 1rem 1.5rem;
-            border: 2px solid #e0e0e0;
+            padding: 1.2rem 3.5rem 1.2rem 1.5rem;
+            border: 2px solid #e0e7e4;
             border-radius: 50px;
             font-size: 1rem;
             transition: var(--transition);
             outline: none;
+            background: white;
+            box-shadow: var(--shadow-sm);
         }
 
         .search-box input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(44, 95, 45, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.15);
+        }
+
+        .search-box::before {
+            content: '🔍';
+            position: absolute;
+            right: 1.3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            opacity: 0.5;
         }
 
         .filter-box {
@@ -93,114 +182,198 @@
         }
 
         .filter-btn {
-            padding: 0.6rem 1.2rem;
-            border: none;
-            background-color: white;
-            color: var(--text-color);
-            border-radius: 20px;
+            padding: 0.7rem 1.4rem;
+            border: 2px solid transparent;
+            background: white;
+            color: var(--text-dark);
+            border-radius: 25px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.9rem;
             transition: var(--transition);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
         }
 
-        .filter-btn:hover, .filter-btn.active {
-            background-color: var(--primary-color);
-            color: white;
+        .filter-btn:hover {
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+
+        .filter-btn.active {
+            background: var(--gradient);
+            color: white;
+            box-shadow: var(--shadow-md);
         }
 
         /* Products Grid */
         .products-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto 4rem;
             padding: 0 1rem;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
         }
 
         .product-card {
-            background: var(--card-bg);
-            border-radius: 15px;
+            background: white;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-md);
             transition: var(--transition);
             display: flex;
             flex-direction: column;
             position: relative;
-            cursor: pointer;
+            border: 1px solid #e8f0ec;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.4rem 1rem;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .product-badge.essential {
+            background: linear-gradient(135deg, #e63946, #d62828);
+        }
+
+        .product-badge.carrier {
+            background: linear-gradient(135deg, #2a9d8f, #264653);
+        }
+
+        .product-badge.other {
+            background: linear-gradient(135deg, #e9c46a, #f4a261);
+        }
+
+        .product-image-container {
+            height: 220px;
+            width: 100%;
+            background: linear-gradient(135deg, var(--secondary) 0%, #b7e4c7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image-container::after {
+            content: '🌿';
+            font-size: 5rem;
+            opacity: 0.3;
         }
 
         .product-image {
-            height: 250px;
             width: 100%;
+            height: 100%;
             object-fit: cover;
-            background-color: #f0f0f0;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         .product-info {
-            padding: 1.5rem;
+            padding: 1.8rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
 
-        .product-title {
-            font-size: 1.3rem;
-            color: var(--primary-color);
+        .product-category {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 0.5rem;
-            font-weight: 700;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.8rem;
+            font-weight: 800;
+            line-height: 1.3;
         }
 
         .product-benefits {
             font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1rem;
+            color: #5a7684;
+            margin-bottom: 1.2rem;
             flex-grow: 1;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            line-height: 1.6;
         }
 
         .product-tags {
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
-            margin-top: auto;
+            margin-bottom: 1.2rem;
         }
 
         .tag {
             font-size: 0.75rem;
-            padding: 0.3rem 0.8rem;
-            background-color: #e8f5e9;
-            color: var(--primary-color);
-            border-radius: 12px;
-            font-weight: 500;
+            padding: 0.35rem 0.9rem;
+            background: var(--secondary);
+            color: var(--primary-dark);
+            border-radius: 15px;
+            font-weight: 600;
         }
 
         .view-details-btn {
-            margin-top: 1rem;
-            padding: 0.7rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 0.9rem 1.5rem;
+            background: var(--gradient);
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 12px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 0.95rem;
             transition: var(--transition);
             width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .view-details-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(44, 95, 45, 0.3);
+            box-shadow: 0 6px 20px rgba(45, 106, 79, 0.4);
         }
 
         /* Modal */
@@ -210,172 +383,294 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(8, 28, 21, 0.85);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             padding: 1rem;
+            backdrop-filter: blur(8px);
         }
 
         .modal-overlay.active {
             display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
             background: white;
-            border-radius: 20px;
-            max-width: 800px;
+            border-radius: 25px;
+            max-width: 900px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            animation: modalSlideIn 0.3s ease;
+            animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-lg);
         }
 
         @keyframes modalSlideIn {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(50px) scale(0.95);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
         .modal-close {
             position: absolute;
-            top: 1rem;
-            left: 1rem;
-            width: 40px;
-            height: 40px;
-            background: var(--primary-color);
+            top: 1.5rem;
+            left: 1.5rem;
+            width: 45px;
+            height: 45px;
+            background: var(--primary-dark);
             color: white;
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10;
             transition: var(--transition);
+            box-shadow: var(--shadow-md);
         }
 
         .modal-close:hover {
-            background: #1a3c1b;
-            transform: rotate(90deg);
+            background: var(--warning);
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .modal-header {
+            height: 350px;
+            position: relative;
+            background: linear-gradient(135deg, var(--secondary) 0%, #b7e4c7 100%);
+            border-radius: 25px 25px 0 0;
+            overflow: hidden;
         }
 
         .modal-image {
             width: 100%;
-            height: 300px;
+            height: 100%;
             object-fit: cover;
-            border-radius: 20px 20px 0 0;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
-        .modal-body {
+        .modal-header-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             padding: 2rem;
+            background: linear-gradient(transparent, rgba(8, 28, 21, 0.9));
+            color: white;
+        }
+
+        .modal-category {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
         }
 
         .modal-title {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-weight: 800;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .modal-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-section-title {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .modal-section-title svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .modal-text {
-            color: #555;
-            line-height: 1.8;
-            font-size: 1rem;
+        .modal-body {
+            padding: 2.5rem;
         }
 
         .modal-tags {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.7rem;
             flex-wrap: wrap;
-            margin-top: 1rem;
+            margin-bottom: 2rem;
         }
 
         .modal-tag {
-            padding: 0.5rem 1rem;
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            padding: 0.6rem 1.3rem;
+            background: var(--gradient);
             color: white;
-            border-radius: 20px;
+            border-radius: 25px;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .modal-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 15px;
+            border-right: 4px solid var(--primary);
+        }
+
+        .modal-section.warning {
+            background: #fef5f5;
+            border-right-color: var(--warning);
+        }
+
+        .modal-section-title {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .modal-section-title svg {
+            width: 28px;
+            height: 28px;
+            color: var(--primary);
+        }
+
+        .modal-text {
+            color: #4a5568;
+            line-height: 1.9;
+            font-size: 1rem;
+            text-align: justify;
         }
 
         .usage-box {
-            background: #f0f7f0;
-            border-right: 4px solid var(--primary-color);
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
             margin-top: 1rem;
+            box-shadow: var(--shadow-sm);
         }
 
         .usage-box h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
             font-weight: 700;
+            font-size: 1.1rem;
         }
 
         .usage-box ul {
             list-style: none;
-            padding-right: 1rem;
+            padding-right: 0;
         }
 
         .usage-box li {
             position: relative;
-            padding-right: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #555;
+            padding-right: 2rem;
+            margin-bottom: 0.8rem;
+            color: #4a5568;
+            line-height: 1.7;
         }
 
         .usage-box li::before {
-            content: "✓";
+            content: '✓';
             position: absolute;
             right: 0;
-            color: var(--primary-color);
-            font-weight: bold;
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .warning-text {
+            color: var(--warning);
+            font-weight: 600;
+            background: rgba(230, 57, 70, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border: 1px solid rgba(230, 57, 70, 0.3);
+        }
+
+        /* Product Count & Stats */
+        .stats-bar {
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .product-count {
+            color: #6b7280;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .product-count span {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
         }
 
         /* Footer */
         footer {
-            background-color: var(--primary-color);
+            background: var(--bg-dark);
             color: white;
             text-align: center;
-            padding: 2rem;
-            margin-top: auto;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
         }
 
-        /* Product Count */
-        .product-count {
-            text-align: center;
-            color: #666;
+        footer .logo {
+            font-size: 2rem;
+            font-weight: 800;
             margin-bottom: 1rem;
-            font-size: 0.95rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        footer p {
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        footer .disclaimer {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        /* Scrollbar */
+        .modal-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f5f4;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
         }
 
         /* Responsive */
@@ -384,80 +679,172 @@
                 font-size: 2rem;
             }
             
+            header .subtitle {
+                font-size: 1rem;
+            }
+
             .controls {
                 flex-direction: column;
                 align-items: stretch;
+            }
+
+            .search-box {
+                max-width: 100%;
             }
             
             .filter-box {
                 justify-content: flex-start;
                 overflow-x: auto;
                 padding-bottom: 0.5rem;
+                -webkit-overflow-scrolling: touch;
             }
 
-            .modal-image {
-                height: 200px;
+            .modal-header {
+                height: 250px;
             }
 
             .modal-title {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
             .modal-body {
                 padding: 1.5rem;
+            }
+
+            .products-container {
+                grid-template-columns: 1fr;
             }
         }
 
         .no-results {
             grid-column: 1 / -1;
             text-align: center;
-            padding: 3rem;
-            font-size: 1.2rem;
-            color: #666;
+            padding: 4rem 2rem;
+            font-size: 1.3rem;
+            color: #6b7280;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
         }
 
-        /* Scrollbar for modal */
-        .modal-content::-webkit-scrollbar {
-            width: 8px;
+        .no-results svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            opacity: 0.5;
         }
 
-        .modal-content::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
         }
 
-        .modal-content::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 10px;
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--secondary);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        .modal-content::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-color);
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Category Legend */
+        .category-legend {
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.essential {
+            background: linear-gradient(135deg, #e63946, #d62828);
+        }
+
+        .legend-dot.carrier {
+            background: linear-gradient(135deg, #2a9d8f, #264653);
+        }
+
+        .legend-dot.other {
+            background: linear-gradient(135deg, #e9c46a, #f4a261);
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-pattern"></div>
+
     <header>
-        <h1>متجر نور الصالحين</h1>
-        <p>أفضل الزيوت الطبية الطبيعية لصحتك وعافيتك</p>
+        <div class="header-content">
+            <h1>🌿 متجر نور الصالحين</h1>
+            <p class="subtitle">أفضل الزيوت الطبية الطبيعية المستخلصة بعناية لصحتك وعافيتك</p>
+            <div class="tagline">✨ زيوت طبيعية 100% • معتمدة • عالية الجودة</div>
+        </div>
     </header>
 
-    <div class="controls">
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="ابحث عن زيت...">
+    <div class="category-legend">
+        <div class="legend-item">
+            <div class="legend-dot essential"></div>
+            <span>زيوت عطرية أساسية</span>
         </div>
-        <div class="filter-box" id="filterContainer">
-            <button class="filter-btn active" data-filter="all">الكل</button>
-            <button class="filter-btn" data-filter="skin">للجلد والشعر</button>
-            <button class="filter-btn" data-filter="health">للصحة العامة</button>
-            <button class="filter-btn" data-filter="digestive">للهضم</button>
-            <button class="filter-btn" data-filter="relax">للاسترخاء</button>
-            <button class="filter-btn" data-filter="pain">لتسكين الآلام</button>
+        <div class="legend-item">
+            <div class="legend-dot carrier"></div>
+            <span>زيوت حاملة ونباتية</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-dot other"></div>
+            <span>زيوت أخرى</span>
         </div>
     </div>
 
-    <div class="product-count" id="productCount"></div>
+    <div class="category-info">
+        <h3>⚠️ معلومات هامة قبل الاستخدام</h3>
+        <p><strong>الزيوت العطرية الأساسية:</strong> عالية التركيز، نادراً ما تستخدم مباشرة على الجلد ويجب تخفيفها بزيت ناقل (مثل جوز الهند أو اللوز الحلو). <strong>الزيوت الحاملة:</strong> يمكن استخدامها بمفردها أو لتخفيف الزيوت الأساسية.</p>
+    </div>
+
+    <div class="controls">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="ابحث عن زيت باسمه أو فائدته...">
+        </div>
+        <div class="filter-box" id="filterContainer">
+            <button class="filter-btn active" data-filter="all">الكل</button>
+            <button class="filter-btn" data-filter="essential">عطرية</button>
+            <button class="filter-btn" data-filter="carrier">حاملة</button>
+            <button class="filter-btn" data-filter="other">أخرى</button>
+            <button class="filter-btn" data-filter="skin">للجلد</button>
+            <button class="filter-btn" data-filter="hair">للشعر</button>
+            <button class="filter-btn" data-filter="health">للصحة</button>
+            <button class="filter-btn" data-filter="relax">للاسترخاء</button>
+            <button class="filter-btn" data-filter="pain">للآلام</button>
+        </div>
+    </div>
+
+    <div class="stats-bar">
+        <div class="product-count" id="productCount"></div>
+    </div>
 
     <div class="products-container" id="productsGrid">
         <!-- Products will be injected here -->
@@ -467,15 +854,21 @@
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
-            <img src="" alt="" class="modal-image" id="modalImage">
+            <div class="modal-header">
+                <img src="" alt="" class="modal-image" id="modalImage">
+                <div class="modal-header-overlay">
+                    <div class="modal-category" id="modalCategory"></div>
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                </div>
+            </div>
             <div class="modal-body">
-                <h2 class="modal-title" id="modalTitle"></h2>
                 <div class="modal-tags" id="modalTags"></div>
                 
                 <div class="modal-section">
                     <h3 class="modal-section-title">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            <circle cx="12" cy="12" r="3"/>
                         </svg>
                         الفوائد الصحية
                     </h3>
@@ -493,7 +886,7 @@
                     <div class="usage-box" id="modalUsage"></div>
                 </div>
 
-                <div class="modal-section">
+                <div class="modal-section warning">
                     <h3 class="modal-section-title">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
@@ -509,8 +902,12 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 متجر نور الصالحين للزيوت الطبية. جميع الحقوق محفوظة.</p>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">جميع المنتجات طبيعية 100% ومعتمدة</p>
+        <div class="logo">🌿 نور الصالحين</div>
+        <p>جميع المنتجات طبيعية 100% ومعتمدة من وزارة الصحة</p>
+        <p>تأسس 2024 • جودة مضمونة • خدمة عملاء متميزة</p>
+        <div class="disclaimer">
+            <strong>⚠️ إخلاء مسؤولية:</strong> المعلومات المقدمة على هذا الموقع لأغراض تعليمية وإعلامية فقط ولا تغني عن استشارة الطبيب أو المختص. بعض الزيوت قد تكون غير مناسبة للحوامل، المرضعات، الأطفال، أو الأشخاص الذين يعانون من حالات صحية معينة. يرجى استشارة المختص قبل استخدام أي زيت، خاصة للاستخدام الداخلي.
+        </div>
     </footer>
 
     <script>
@@ -518,14 +915,17 @@
         const products = [
             {
                 id: 1,
-                name: "زيت الشاي",
+                name: "زيت شجرة الشاي",
+                nameEn: "Tea Tree Oil",
+                category: "essential",
+                categoryLabel: "زيت عطري أساسي",
                 image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/169bc76fb-7a0c-420a-be1b-b14dc9719732.png",
-                benefits: "زيت الشاي من أقوى الزيوت المضادة للبكتيريا والفطريات والفيروسات. يعالج حب الشباب بفعالية عالية، يقوي بصيلات الشعر ويمنع تساقطه، يخفف من قشرة الرأس والالتهابات الجلدية. كما يساعد في علاج الفطريات بين الأصابع وعلى الأظافر، ويعمل كمطهر طبيعي للجروح الصغيرة والخدوش.",
+                benefits: "مضاد قوي للبكتيريا، الفطريات، والفيروسات. ممتاز لعلاج حب الشباب، قشرة الرأس، قدم الرياضي، التهابات الجلد الفطرية، ولتطهير الجروح الطفيفة ولدغات الحشرات.",
                 usage: [
-                    "لحب الشباب: ضع قطرة واحدة مباشرة على البثرة باستخدام عود قطني",
-                    "للشعر: أضف 5 قطرات إلى шампونك المعتاد واستخدمه 3 مرات أسبوعياً",
-                    "للقشرة: امزج 10 قطرات مع ملعقتين من زيت جوز الهند ودلك فروة الرأس",
-                    "كمطهر: خفف بنسبة 1:10 مع الماء واستخدمه لتنظيف الأسطح والجروح السطحية"
+                    "للبشرة: تضاف بضع قطرات إلى كريم الوجه أو تخفف بزيت ناقل وتوضع على الحبوب",
+                    "للفروة: تضاف بضع قطرات إلى الشامبو لعلاج القشرة",
+                    "للتنظيف: تضاف إلى الماء لتنظيف الأسطح كمطهر طبيعي",
+                    "للأظافر: يوضع مباشرة على الأظافر المصابة بالفطريات"
                 ],
                 warnings: "لا يستخدم داخلياً. قد يسبب تهيجاً للبشرة الحساسة، يجب تخفيفه قبل الاستخدام. تجنب منطقة العين. غير مناسب للحوامل والمرضعات دون استشارة طبية.",
                 tags: ["skin", "health"]
@@ -533,309 +933,384 @@
             {
                 id: 2,
                 name: "زيت الزنجبيل",
+                nameEn: "Ginger Oil",
+                category: "essential",
+                categoryLabel: "زيت عطري أساسي",
                 image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/138af5d5d-ebc6-406b-94e7-25bf289fffa4.png",
-                benefits: "زيت الزنجبيل دافئ ومنشط للدورة الدموية. يساعد في تخفيف آلام المفاصل والعضلات والروماتيزم، يحسن الهضم ويقلل من الغثيان والانتفاخ. يعزز المناعة ويقاوم نزلات البرد، كما يساعد في تخفيف آلام الدورة الشهرية. له خصائص مضادة للالتهابات ومفيد في علاج الصداع النصفي.",
+                benefits: "دافئ ومنشط. مشهور لتخفيف الغثيان (خاصة غثيان الصباح ودوار الحركة)، تحسين الهضم، تخفيف آلام العضلات والمفاصل (بسبب خصائصه المضادة للالتهابات)، وتنشيط الدورة الدموية.",
                 usage: [
-                    "لآلام المفاصل: امزج 5 قطرات مع ملعقة زيت ناقل ودلك المنطقة المؤلمة",
-                    "للهضم: أضف قطرة واحدة إلى كوب من الماء الدافئ واشربه بعد الوجبات",
-                    "للبرد: استنشاق البخار مع 3 قطرات يخفف من احتقان الأنف",
-                    "للدورة الدموية: استخدمه في تدليك القدمين قبل النوم"
+                    "للتدليك: يخفف بزيت ناقل ويدلك على المناطق المؤلمة (العضلات، المفاصل، أسفل البطن)",
+                    "الاستنشاق: توضع قطرة في منديل وتستنشق لتخفيف الغثيان",
+                    "الحمام: تضاف بضع قطرات ممزوجة بملح البحر إلى حوض الاستحمام",
+                    "للطاقة: ينشر في الصباح لتنشيط الجسم والذهن"
                 ],
                 warnings: "لا يستخدم داخلياً بكميات كبيرة. قد يسبب حرقة للبشرة الحساسة. غير مناسب لمرضى ضغط الدم المرتفع دون استشارة طبية. تجنب استخدامه قبل الجراحة.",
-                tags: ["health", "digestive", "pain"]
+                tags: ["health", "pain", "digestive"]
             },
             {
                 id: 3,
-                name: "زيت الريحان",
+                name: "زيت الياسمين (زيت الآس)",
+                nameEn: "Jasmine Oil",
+                category: "essential",
+                categoryLabel: "زيت عطري أساسي",
                 image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/16091fb1d-a907-47a6-a78e-0a91aa1fbc4c.png",
-                benefits: "زيت الريحان مهدئ للأعصاب ومنشط للذهن. يقلل من التوتر والإجهاد النفسي، يحسن التركيز والذاكرة، ويساعد في تخفيف آلام الصداع والتوتر. يقوي الجهاز التنفسي ويخفف من أعراض الربو والحساسية. كما له خصائص مضادة للبكتيريا ويعزز صحة الجلد.",
+                benefits: "معروف برائحته الزهرية الجميلة. مضاد للاكتئاب، منعش، ومثير للشهوة الجنسية. يساعد في تخفيف التوتر والقلق، ويعزز الثقة بالنفس. مفيد أيضاً للبشرة الجافة والحساسة.",
                 usage: [
-                    "للتوتر: أضف 5 قطرات إلى جهاز نشر الروائح في الغرفة",
-                    "للتركيز: استنشق الزيت مباشرة من الزجاجة لمدة 30 ثانية",
-                    "للصداع: امزج قطرتين مع زيت ناقل ودلك الصدغين بلطف",
-                    "للتنفس: أضف 3 قطرات إلى ماء ساخن واستنشق البخار"
+                    "العطور: يستخدم كعطر طبيعي",
+                    "العلاج العطري: ينشر في المبخرة لتحسين المزاج والنوم",
+                    "العناية بالبشرة: تضاف قطرة إلى مرطب البشرة",
+                    "للاسترخاء: يضاف إلى ماء الاستحمام الدافئ"
                 ],
-                warnings: "لا يستخدم داخلياً. غير مناسب للحوامل والأطفال دون سن 6 سنوات. قد يتفاعل مع بعض الأدوية المميعة للدم.",
-                tags: ["relax", "health"]
+                warnings: "لا يستخدم داخلياً. غير مناسب للحوائل والأطفال دون سن 6 سنوات. قد يتفاعل مع بعض الأدوية. اختبره على منطقة صغيرة أولاً.",
+                tags: ["relax", "skin", "health"]
             },
             {
                 id: 4,
-                name: "زيت الهال",
+                name: "زيت الهيل (الهال)",
+                nameEn: "Cardamom Oil",
+                category: "essential",
+                categoryLabel: "زيت عطري أساسي",
                 image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/1093ba285-d2f5-4e88-bb36-e15ade4af2ac.png",
-                benefits: "زيت الهال معطر ومنعش للفم والجهاز الهضمي. يساعد في علاج عسر الهضم والانتفاخ والغازات، يعطر الفم ويقضي على الروائح الكريهة. يخفف من الغثيان والدوار، ويدعم صحة الجهاز التنفسي. له خصائص مضادة للتشنجات ومفيد في تخفيف آلام المغص.",
+                benefits: "منعش ودافئ. يساعد في تحسين الهضم وتخفيف عسر الهضم وانتفاخ البطن. قد يساعد في تخفيف السعال والاحتقان. يعتقد أنه يعزز المزاج ويعمل كمضاد خفيف للتشنجات.",
                 usage: [
-                    "للهضم: أضف قطرة واحدة إلى كوب من الشاي بعد الوجبات",
-                    "لفم منعش: ضع قطرة واحدة على فرشاة الأسنان قبل التنظيف",
-                    "للغثيان: استنشق الزيت مباشرة من الزجاجة",
-                    "للمغص: امزج 3 قطرات مع زيت ناقل ودلك البطن بحركات دائرية"
+                    "التدليك: يخفف ويستخدم لتدليك البطن لتخفيف المغص",
+                    "الاستنشاق: يستنشق لفتح الشعب الهوائية وتخفيف الاحتقان",
+                    "للهضم: تضاف قطرة إلى كوب من الشاي بعد الوجبات",
+                    "للفم: يستخدم كمعطر طبيعي للفم"
                 ],
                 warnings: "لا يستخدم داخلياً بكميات كبيرة. غير مناسب للأطفال الصغار. قد يسبب تهيجاً للجلد إذا استخدم بدون تخفيف.",
-                tags: ["digestive", "health"]
+                tags: ["digestive", "health", "relax"]
             },
             {
                 id: 5,
-                name: "زيت الحنظل",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/138af5d5d-ebc6-406b-94e7-25bf289fffa4.png",
-                benefits: "زيت الحنظل يستخدم بحذر شديد لأغراض طبية محددة. يساعد في علاج بعض الأمراض الجلدية المستعصية، مسكن قوي للآلام الموضعية والروماتيزم. يستخدم تقليدياً لعلاج الالتهابات الجلدية والفطريات. له خصائص مضادة للالتهابات قوية.",
-                usage: [
-                    "لآلام المفاصل: امزج قطرة واحدة مع 10 قطرات زيت ناقل ودلك المنطقة",
-                    "للجلد: يستخدم بتركيز منخفض جداً تحت إشراف مختص",
-                    "لا يستخدم داخلياً أبداً"
-                ],
-                warnings: "⚠️ زيت سام جداً! لا يستخدم داخلياً أبداً. يجب تخفيفه بشكل كبير قبل الاستخدام الخارجي. غير مناسب للحوامل والأطفال. استخدم فقط تحت إشراف طبي.",
-                tags: ["skin", "pain"]
-            },
-            {
-                id: 6,
                 name: "زيت الليمون",
+                nameEn: "Lemon Oil",
+                category: "essential",
+                categoryLabel: "زيت عطري أساسي",
                 image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/1f1e6c2a4-f2ce-4112-adc2-a06e41e3bdf8.png",
-                benefits: "زيت الليمون منقي ومنعش طبيعي. يعزز المناعة ويحارب الالتهابات، يفتح البشرة ويوحد لونها، يقلل من ظهور البقع الداكنة. يحسن المزاج ويخفف من القلق والتوتر. مطهر قوي للأسطح والهواء، يساعد في الهضم ويقلل من الغثيان.",
+                benefits: "منعش، منقي، ومنشط للذهن. يعزز التركيز واليقظة. مطهر قوي، ومفيد في تنقية البشرة الدهنية. يمكن استخدامه في تنظيف المنزل وتعطيره.",
                 usage: [
-                    "للبشرة: امزج قطرتين مع كريم الترطيب الليلي",
-                    "للمناعة: أضف قطرة واحدة إلى كوب من الماء الدافئ مع العسل",
-                    "للمزاج: انشر الزيت في الغرفة باستخدام جهاز النشر",
-                    "للتطهير: امزج 10 قطرات مع كوب ماء ورشه على الأسطح"
+                    "الاستنشاق: ينشر في الغرفة للانتعاش والتركيز",
+                    "العناية بالبشرة: تضاف قطرة (مخففة جداً) إلى ماء الغسول للبشرة الدهنية",
+                    "التنظيف: تضاف بضع قطرات إلى الماء والخل لتنظيف الأسطح",
+                    "للمناعة: تضاف قطرة إلى كوب من الماء الدافئ مع العسل"
                 ],
-                warnings: "يسبب حساسية للشمس، لا تعرض البشرة للشمس بعد الاستخدام. خفف دائماً قبل الاستخدام على البشرة. غير مناسب للبشرة الحساسة جداً.",
+                warnings: "⚠️ قد يسبب حساسية للضوء، لذا تجنب التعرض للشمس بعد وضعه موضعياً. خفف دائماً قبل الاستخدام على البشرة. غير مناسب للبشرة الحساسة جداً.",
                 tags: ["skin", "health", "relax"]
             },
             {
-                id: 7,
+                id: 6,
                 name: "زيت الميرمية",
+                nameEn: "Sage Oil",
+                category: "essential",
+                categoryLabel: "زيت عطري أساسي",
                 image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/10004bd33-dc61-4591-960a-b52f9a2d4a18.png",
-                benefits: "زيت الميرمية منظم هرموني طبيعي. يخفف من أعراض انقطاع الطمث والهبات الساخنة، ينظم الدورة الشهرية ويقلل من آلامها. يعزز صحة الشعر ويمنع الشيب المبكر. مضاد للبكتيريا والفطريات، يحسن الذاكرة والوظائف المعرفية.",
+                benefits: "منشط للهرمونات، يشتهر بتخفيف أعراض سن اليأس (الهبات الساخنة) وتنظيم الدورة الشهرية. مفيد للذاكرة والتركيز. مطهر وقابض للبشرة الدهنية.",
                 usage: [
-                    "للهرمونات: أضف 3 قطرات إلى زيت ناقل ودلك أسفل البطن",
-                    "للشعر: امزج 5 قطرات مع الشامبو واستخدمه مرتين أسبوعياً",
-                    "للذاكرة: استنشق الزيت لمدة دقيقة يومياً",
-                    "للدورة: استخدمه في تدليك منطقة البطن قبل الدورة بأسبوع"
+                    "العلاج العطري: يستنشق لتحسين الذاكرة",
+                    "العناية بالبشرة: يخفف ويستخدم للبشرة الدهنية",
+                    "للدورة: يضاف إلى زيت ناقل ويدلك أسفل البطن",
+                    "للتركيز: ينشر في غرفة العمل أو الدراسة"
                 ],
-                warnings: "غير مناسب للحوامل تماماً. لا يستخدم مع أدوية الهرمونات دون استشارة طبية. قد يرفع ضغط الدم عند بعض الأشخاص.",
-                tags: ["health", "skin"]
+                warnings: "⚠️ يجب تجنبه أثناء الحمل، ولا يستخدم بكميات كبيرة. غير مناسب لمرضى الصرع. قد يرفع ضغط الدم عند بعض الأشخاص.",
+                tags: ["health", "skin", "relax"]
+            },
+            {
+                id: 7,
+                name: "زيت المليسة (ميليسا / ترنجان)",
+                nameEn: "Lemon Balm Oil",
+                category: "essential",
+                categoryLabel: "زيت عطري أساسي",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/10004bd33-dc61-4591-960a-b52f9a2d4a18.png",
+                benefits: "مهدئ قوي ومضاد للاكتئاب. ممتاز لتخفيف التوتر، القلق، والأرق. مفيد في تهدئة اضطرابات المعدة العصبية. كما أنه مضاد للفيروسات (مفيد لمرض الهربس).",
+                usage: [
+                    "العلاج العطري: ينشر في الغرفة لخلق جو مريح قبل النوم",
+                    "موضعياً: يخفف ويوضع على مناطق التوتر (الصدغين) أو على قرحة البرد",
+                    "للنوم: يضاف إلى الوسادة أو جهاز النشر",
+                    "للمعدة: يدلك البطن به مخففاً لتهدئة الاضطرابات"
+                ],
+                warnings: "قد يسبب النعاس، لا تقود بعد الاستخدام. غير مناسب مع أدوية المهدئات. استشر الطبيب إذا كنت تتناول أدوية للغدة الدرقية.",
+                tags: ["relax", "health", "skin"]
             },
             {
                 id: 8,
-                name: "زيت المليسة",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/10004bd33-dc61-4591-960a-b52f9a2d4a18.png",
-                benefits: "زيت المليسة مهدئ قوي للأعصاب. يساعد على النوم العميق ويحارب الأرق، يخفف من القلق والتوتر والاكتئاب. يحسن الهضم ويقلل من التشنجات المعوية. يعزز الوظائف المعرفية والذاكرة، له خصائص مضادة للفيروسات.",
+                name: "زيت البردقوش (المرزنجوش)",
+                nameEn: "Marjoram Oil",
+                category: "essential",
+                categoryLabel: "زيت عطري أساسي",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/187f627c4-626c-4354-a4a1-6cb0a29a53e9.png",
+                benefits: "مسكن ومهدئ للأعصاب. يساعد في تخفيف آلام العضلات، تشنجات الدورة الشهرية، الصداع، وأعراض القلق والأرق.",
                 usage: [
-                    "للنوم: أضف 5 قطرات إلى وسادتك أو جهاز النشر قبل النوم",
-                    "للقلق: استنشق الزيت مباشرة عند الشعور بالتوتر",
-                    "للهضم: امزج قطرتين مع زيت ناقل ودلك البطن",
-                    "للاسترخاء: أضف 10 قطرات إلى ماء الاستحمام الدافئ"
+                    "التدليك: يخفف بزيت ناقل ويدلك على البطن لتخفيف التقلصات أو على العضلات المتعبة",
+                    "للنوم: ينشر في غرفة النوم قبل النوم بساعة",
+                    "للصداع: يدلك به الصدغين والرقبة",
+                    "للدورة: يستخدم في تدليك أسفل البطن قبل وأثناء الدورة"
                 ],
-                warnings: "قد يسبب النعاس، لا تقود بعد الاستخدام. غير مناسب مع أدوية المهدئات. استشر الطبيب إذا كنت تتناول أدوية للغدة الدرقية.",
-                tags: ["relax", "health"]
+                warnings: "غير مناسب للحوامل تماماً. قد يسبب النعاس. لا تستخدمه قبل القيادة أو تشغيل الآلات.",
+                tags: ["relax", "pain", "health"]
             },
             {
                 id: 9,
-                name: "زيت حبة السوداء (البركة)",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/1e32157e2-6d8a-4cc6-b14c-1a88b19fb95c.png",
-                benefits: "زيت حبة السوداء شفاء من كل داء إلا السام. يعزز المناعة بشكل استثنائي ويقاوم الأمراض، مضاد قوي للالتهابات والحساسية. يحسن صحة الجهاز التنفسي ويخفف من الربو. ينظم سكر الدم وضغط الدم، يعزز صحة الجلد والشعر، مضاد للأكسدة قوي.",
+                name: "زيت إكليل الجبل (روزماري)",
+                nameEn: "Rosemary Oil",
+                category: "essential",
+                categoryLabel: "زيت عطري أساسي",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/198f6ad5f-589c-490a-8fda-41515ab8604d.png",
+                benefits: "منشط للدورة الدموية، للذاكرة، ولنمو الشعر. يساعد في تخفيف آلام العضلات، وتحسين الهضم، وتقوية الجهاز العصبي.",
                 usage: [
-                    "للمناعة: تناول نصف ملعقة صغيرة يومياً على معدة فارغة",
-                    "للحساسية: ضع قطرة في كل منخر صباحاً ومساءً",
-                    "للجلد: دلك المنطقة المصابة بالزيت مباشرة",
-                    "للشعر: امزج مع زيت جوز الهند واستخدمه كقناع أسبوعي"
+                    "للشعر: تضاف بضع قطرات إلى الشامبو أو زيت جوز الهند لتدليك فروة الرأس وتحفيز النمو",
+                    "الاستنشاق: يستنشق أثناء الدراسة أو العمل لتحسين التركيز",
+                    "لآلام العضلات: يخفف ويدلك على المنطقة المؤلمة",
+                    "للطاقة: ينشر في الصباح لتنشيط الذهن"
                 ],
-                warnings: "قد يخفض سكر الدم، احذر إذا كنت تتناول أدوية السكري. غير مناسب للحوامل بكميات كبيرة. قد يتفاعل مع أدوية ضغط الدم.",
-                tags: ["health", "skin"]
+                warnings: "غير مناسب للحوامل والأطفال دون 6 سنوات. قد يرفع ضغط الدم. لا تستخدمه قبل النوم لأنه منشط.",
+                tags: ["hair", "health", "pain"]
             },
             {
                 id: 10,
-                name: "زيت جوز الهند",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/14d414657-68e5-486e-9c03-b19975954eca.png",
-                benefits: "زيت جوز الهند مرطب عميق ومتعدد الاستخدامات. يرطب البشرة والشعر بعمق ويحمي من الجفاف، يقوي الشعر ويمنع تكسره. مضاد للبكتيريا والفطريات، يزيل المكياج بفعالية. يحسن صحة الفم عند المضمضة به، يساعد في التئام الجروح.",
-                usage: [
-                    "للبشرة: استخدمه كمرطب يومي بعد الاستحمام",
-                    "للشعر: ضعه كقناع قبل الغسل لمدة ساعة على الأقل",
-                    "للفم: تمضمض بملعقة كبيرة لمدة 10 دقائق يومياً",
-                    "للمكياج: استخدمه لإزالة المكياج بلطف"
-                ],
-                warnings: "قد يسد المسام للبشرة الدهنية جداً. احفظه في مكان بارد لأنه يذوب بسهولة. اختبره على منطقة صغيرة أولاً.",
-                tags: ["skin", "health"]
-            },
-            {
-                id: 11,
-                name: "زيت اللوز المر",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/13fc4842b-ebbf-4ec4-857f-fec3189a3751.png",
-                benefits: "زيت اللوز المر يستخدم خارجياً فقط. يقوي بصيلات الشعر ويمنع تساقطه، مفيد للآلام الروماتيزمية والعضلية. يخفف من الحكة والتهابات الجلد. له رائحة مميزة ومهدئة. يستخدم تقليدياً لتغميق الهالات حول العينين.",
-                usage: [
-                    "للشعر: دلك فروة الرأس بالزيت قبل النوم واغسله صباحاً",
-                    "لآلام المفاصل: امزج مع زيت دافئ ودلك المنطقة المؤلمة",
-                    "للهالات: ضع كمية صغيرة جداً حول العينين قبل النوم",
-                    "للجلد: استخدمه كمرطب لل مناطق الجافة"
-                ],
-                warnings: "⚠️ سام عند البلع! للاستخدام الخارجي فقط. غير مناسب للحوامل والأطفال. تجنب منطقة العين مباشرة.",
-                tags: ["skin", "pain"]
-            },
-            {
-                id: 12,
-                name: "زيت اللوز الحلو",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/13fc4842b-ebbf-4ec4-857f-fec3189a3751.png",
-                benefits: "زيت اللوز الحلو مرطب ممتاز لجميع أنواع البشرة. يغذي البشرة بالفيتامينات والمعادن، يزيل الهالات السوداء ويوحد لون البشرة. يخفف من التهيج والاحمرار، مناسب للبشرة الحساسة والأطفال. يمنع ظهور علامات التمدد أثناء الحمل.",
-                usage: [
-                    "للبشرة: استخدمه كمرطب يومي صباحاً ومساءً",
-                    "للهالات: دلك منطقة تحت العين بلطف قبل النوم",
-                    "للحوامل: دلك البطن والثديين يومياً من الشهر الرابع",
-                    "للأطفال: آمن للاستخدام على بشرة الأطفال الرضع"
-                ],
-                warnings: "آمن بشكل عام. تجنبه إذا كنت تعاني من حساسية المكسرات. احفظه في مكان بارد ومظلم.",
-                tags: ["skin", "relax"]
-            },
-            {
-                id: 13,
-                name: "زيت البردقوش",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/187f627c4-626c-4354-a4a1-6cb0a29a53e9.png",
-                benefits: "زيت البردقوش مهدئ ومضاد للتشنجات. ينظم الدورة الشهرية ويخفف من آلامها، يهدئ السعال والربو ومشاكل الجهاز التنفسي. مضاد للبكتيريا والفطريات، يخفف من آلام العضلات والمفاصل. يحسن الهضم ويقلل من الغازات والانتفاخ.",
-                usage: [
-                    "للدورة: امزج 5 قطرات مع زيت ناقل ودلك أسفل البطن",
-                    "للتنفس: أضف 3 قطرات إلى ماء ساخن واستنشق البخار",
-                    "لآلام العضلات: دلك المنطقة بالزيت المخفف",
-                    "للهضم: أضف قطرة واحدة إلى كوب من الشاي"
-                ],
-                warnings: "غير مناسب للحوامل تماماً. قد يسبب النعاس. لا تستخدمه قبل القيادة أو تشغيل الآلات.",
-                tags: ["health", "relax", "pain"]
-            },
-            {
-                id: 14,
-                name: "زيت اكليل الجبل",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/198f6ad5f-589c-490a-8fda-41515ab8604d.png",
-                benefits: "زيت اكليل الجبل منشط للذهن والدورة الدموية. يحسن الذاكرة والتركيز بشكل ملحوظ، يحفز نمو الشعر ويمنع تساقطه. يخفف من آلام العضلات والمفاصل، يعزز المناعة ويقاوم الالتهابات. يحسن المزاج ويقلل من التعب والإرهاق.",
-                usage: [
-                    "للذاكرة: استنشق الزيت لمدة 30 ثانية قبل الدراسة أو العمل",
-                    "للشعر: امزج 5 قطرات مع الشامبو واستخدمه 3 مرات أسبوعياً",
-                    "لآلام العضلات: امزج مع زيت ناقل ودلك المنطقة",
-                    "للطاقة: أضف 3 قطرات إلى جهاز النشر في الصباح"
-                ],
-                warnings: "غير مناسب للحوامل والأطفال دون 6 سنوات. قد يرفع ضغط الدم. لا تستخدمه قبل النوم لأنه منشط.",
-                tags: ["health", "skin", "pain"]
-            },
-            {
-                id: 15,
-                name: "زيت البقدونس",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/1ff4be362-e807-47f1-a4cd-bf15288a8b19.png",
-                benefits: "زيت البقدونس غني بالفيتامينات ومضادات الأكسدة. ينقي البشرة ويوحد لونها، يقلل من الهالات السوداء والانتفاخ حول العينين. يقوي الشعر والأظافر، يساعد في إدرار البول وتنقية الجسم من السموم. مضاد للالتهابات ومفيد لصحة المفاصل.",
-                usage: [
-                    "للبشرة: امزج قطرتين مع كريم الوجه واستخدمه ليلاً",
-                    "للهالات: ضع كمية صغيرة حول العينين قبل النوم",
-                    "للشعر: امزج مع زيت الزيتون واستخدمه كقناع أسبوعي",
-                    "لتنقية الجسم: استشر الطبيب للاستخدام الداخلي"
-                ],
-                warnings: "غير مناسب للحوائل بكميات كبيرة. قد يسبب حساسية للشمس. خفف دائماً قبل الاستخدام على البشرة.",
-                tags: ["skin", "health"]
-            },
-            {
-                id: 16,
                 name: "زيت الزعتر",
+                nameEn: "Thyme Oil",
+                category: "essential",
+                categoryLabel: "زيت عطري أساسي",
                 image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/10f6d5e42-30a9-40f7-84b8-302a7489bb86.png",
-                benefits: "زيت الزعتر من أقوى الزيوت المضادة للميكروبات. يقاوم البكتيريا والفطريات والفيروسات، يعزز المناعة ويحارب نزلات البرد. يخفف من السعال والتهابات الجهاز التنفسي، مطهر قوي للجروح والالتهابات الجلدية. يحفز الدورة الدموية ويسكن الآلام.",
+                benefits: "مضاد قوي للبكتيريا والفطريات، منشط للجهاز المناعي. مفيد جداً في حالات السعال والتهاب الشعب الهوائية، ولتطهير الجروح.",
                 usage: [
-                    "للمناعة: أضف قطرة واحدة إلى كوب من العسل والماء الدافئ",
-                    "للتنفس: استنشق البخار مع 3 قطرات من الزيت",
-                    "للجلد: امزج مع زيت ناقل وضعه على المنطقة المصابة",
-                    "للتطهير: أضف 10 قطرات إلى ماء التنظيف"
+                    "الاستنشاق: تضاف قطرة إلى وعاء من الماء الساخن واستنشاق البخار لتخفيف الاحتقان",
+                    "موضعياً: يخفف جيداً جداً ويستخدم كمطهر موضعي",
+                    "للمناعة: ينشر في الغرفة خلال موسم البرد",
+                    "للتنظيف: يضاف إلى محلول التنظيف الطبيعي"
                 ],
-                warnings: "يجب تخفيفه دائماً قبل الاستخدام. غير مناسب للحوائل والأطفال الصغار. قد يسبب تهيجاً للجلد الحساس.",
+                warnings: "⚠️ قوي جداً، يجب تخفيفه بتركيز منخفض. غير مناسب للحوائل والأطفال الصغار. قد يسبب تهيجاً للجلد الحساس.",
                 tags: ["health", "skin"]
             },
             {
-                id: 17,
-                name: "زيت الجرجير",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/1a05432a5-6808-418c-b95b-9ce0d31f8317.png",
-                benefits: "زيت الجرجير غني بالكبريت والفيتامينات. يحفز نمو الشعر ويقوي البصيلات، ينقي البشرة من الشوائب والحبوب. يحسن الدورة الدموية في فروة الرأس، يقوي الأظافر ويمنع تكسرها. مضاد للأكسدة ومفيد لصحة الجلد العامة.",
-                usage: [
-                    "للشعر: دلك فروة الرأس بالزيت واتركه ساعة قبل الغسل",
-                    "للبشرة: امزج مع زيت ناقل واستخدمه كسيروم ليلي",
-                    "للأظافر: دلك الأظافر والجلد حولها يومياً",
-                    "للفروة: استخدمه مرتين أسبوعياً لتحفيز النمو"
-                ],
-                warnings: "قد يسبب تهيجاً للبشرة الحساسة. اختبره على منطقة صغيرة أولاً. للاستخدام الخارجي فقط.",
-                tags: ["skin", "health"]
-            },
-            {
-                id: 18,
-                name: "زيت القرنفل",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/13ac4f497-46cf-4c01-baa9-4a4a271ca8cc.png",
-                benefits: "زيت القرنفل مسكن قوي للآلام خاصة آلام الأسنان. مضاد قوي للبكتيريا والفطريات، يعزز المناعة ويحارب الالتهابات. يحسن الهضم ويقلل من الغثيان، يخفف من آلام المفاصل والعضلات. منشط للدورة الدموية ومفيد لصحة الفم.",
-                usage: [
-                    "لآلام الأسنان: ضع قطرة واحدة على قطنة وضعها على السن المؤلم",
-                    "للفم: أضف قطرة واحدة إلى كوب ماء واستخدمه كمضمضة",
-                    "لآلام المفاصل: امزج مع زيت ناقل ودلك المنطقة",
-                    "للهضم: استنشق الزيت لتخفيف الغثيان"
-                ],
-                warnings: "قوي جداً، يجب تخفيفه دائماً. غير مناسب للأطفال. لا يستخدم لفترات طويلة. تجنب البلع.",
-                tags: ["pain", "health", "digestive"]
-            },
-            {
-                id: 19,
-                name: "زيت الخروع",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/10dec6a7f-640a-4c61-a04c-58e7f4c4c841.png",
-                benefits: "زيت الخروع مرطب عميق ومنشط للنمو. يحفز نمو الشعر والرموش والحواجب بشكل ملحوظ، يرطب البشرة الجافة والمتشققة. مضاد للالتهابات والفطريات، يساعد في التئام الجروح. يخفف من آلام المفاصل والعضلات عند التدليك به.",
-                usage: [
-                    "للشعر: ضعه كقناع ليلة كاملة مرة أسبوعياً",
-                    "للرموش: استخدم فرشاة نظيفة وضعه قبل النوم",
-                    "للبشرة: استخدمه على المناطق الجافة جداً",
-                    "لآلام المفاصل: دلك المنطقة بالزيت الدافئ"
-                ],
-                warnings: "ثقيل القوام، قد يسد المسام. غير مناسب للوجه الدهني. لا يستخدم داخلياً دون إشراف طبي.",
-                tags: ["skin", "health", "pain"]
-            },
-            {
-                id: 20,
-                name: "زيت الخردل",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/1f83a11b3-b2d0-4d01-b39c-b354720aabb4.png",
-                benefits: "زيت الخردل دافئ ومنشط للدورة الدموية. يخفف من آلام المفاصل والروماتيزم، يحفز نمو الشعر ويقوي البصيلات. مضاد للبكتيريا والفطريات، يحسن صحة الجلد. يستخدم تقليدياً في التدليك لتحسين الدورة الدموية.",
-                usage: [
-                    "لآلام المفاصل: سخن الزيت قليلاً ودلك المنطقة المؤلمة",
-                    "للشعر: امزج مع زيت جوز الهند واستخدمه كقناع",
-                    "للدورة الدموية: استخدمه في تدليك الجسم الكامل",
-                    "للبرد: دلك الصدر والظهر بالزيت الدافئ"
-                ],
-                warnings: "قد يسبب تهيجاً للجلد الحساس. اختبره أولاً. رائحته قوية. غير مناسب للاستخدام على الوجه.",
-                tags: ["pain", "skin", "health"]
-            },
-            {
-                id: 21,
-                name: "زيت الكتان",
-                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/14407ff0b-5caf-46b6-99bd-6e2e165cc66a.png",
-                benefits: "زيت الكتان غني بأوميغا 3 والأحماض الدهنية. يرطب البشرة بعمق ويحارب الجفاف، يقوي الشعر والأظافر. مضاد للالتهابات ومفيد لصحة المفاصل. يحسن صحة القلب والأوعية الدموية عند تناوله. غني بمضادات الأكسدة.",
-                usage: [
-                    "للبشرة: استخدمه كمرطب ليلي عميق",
-                    "للشعر: امزج مع زيت الزيتون واستخدمه كقناع",
-                    "للأظافر: دلك الأظافر بالزيت يومياً",
-                    "للمفاصل: يمكن تناوله تحت إشراف طبي"
-                ],
-                warnings: "يتأكسد بسرعة، احفظه في الثلاجة. لا تستخدمه بعد انتهاء الصلاحية. استشر الطبيب قبل الاستخدام الداخلي.",
-                tags: ["skin", "health", "pain"]
-            },
-            {
-                id: 22,
+                id: 11,
                 name: "زيت البابونج",
+                nameEn: "Chamomile Oil",
+                category: "essential",
+                categoryLabel: "زيت عطري أساسي",
                 image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/10c6374e1-17fc-4c21-8923-569eb2452ac9.png",
-                benefits: "زيت البابونج مهدئ ومضاد للالتهابات. يخفف من تهيج البشرة والأكزيما والصدفية، مهدئ قوي للأعصاب ويحارب الأرق. يخفف من آلام الدورة الشهرية والتشنجات، مضاد للحساسية والالتهابات. آمن للأطفال والبشرة الحساسة.",
+                benefits: "مهدئ ومنوم طبيعي. مضاد للالتهابات والحساسية. مفيد جداً لتهدئة البشرة الملتهبة أو الحساسة (إكزيما)، تهدئة الأعصاب، وتخفيف المغص (خاصة للأطفال بعد تخفيفه الشديد).",
                 usage: [
-                    "للبشرة الحساسة: امزج مع كريم الترطيب واستخدمه يومياً",
-                    "للنوم: أضف 5 قطرات إلى وسادتك أو جهاز النشر",
-                    "للدورة: امزج مع زيت ناقل ودلك أسفل البطن",
-                    "للأطفال: آمن للاستخدام في حمام الأطفال"
+                    "العلاج العطري: ممتاز لنشره في غرفة النوم",
+                    "للبشرة: يخفف بزيت ناقل ويدلك على البشرة المتهيجة",
+                    "للأطفال: يضاف إلى ماء الاستحمام بتركيز منخفض جداً",
+                    "للمغص: يدلك البطن به مخففاً"
                 ],
                 warnings: "آمن بشكل عام. تجنبه إذا كنت تعاني من حساسية الأقحوان. اختبره على منطقة صغيرة أولاً.",
                 tags: ["relax", "skin", "health"]
             },
             {
+                id: 12,
+                name: "زيت جوز الهند",
+                nameEn: "Coconut Oil",
+                category: "carrier",
+                categoryLabel: "زيت حامل",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/14d414657-68e5-486e-9c03-b19975954eca.png",
+                benefits: "مرطب عميق للبشرة والشعر. غني بمضادات الأكسدة. له خصائص مضادة للبكتيريا (بسبب حمض اللوريك). مفيد لإزالة المكياج، كمرطب بعد الاستحمام، وللعناية بالشعر (حمام زيت).",
+                usage: [
+                    "ترطيب: يدلك على الجسم بعد الاستحمام",
+                    "للشعر: يوضع على الشعر من منتصفه حتى أطرافه (وليس الفروة إذا كانت دهنية) لترطيبه",
+                    "للمكياج: يستخدم لإزالة المكياج بلطف",
+                    "كزيت ناقل: يستخدم لتخفيف الزيوت العطرية"
+                ],
+                warnings: "قد يسد المسام للبشرة الدهنية جداً. احفظه في مكان بارد لأنه يذوب بسهولة. اختبره على منطقة صغيرة أولاً.",
+                tags: ["skin", "hair", "health"]
+            },
+            {
+                id: 13,
+                name: "زيت اللوز الحلو",
+                nameEn: "Sweet Almond Oil",
+                category: "carrier",
+                categoryLabel: "زيت حامل",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/13fc4842b-ebbf-4ec4-857f-fec3189a3751.png",
+                benefits: "مرطب ممتاز، غني بفيتامين E. يمتصه الجلد بسهولة. يستخدم شائعاً كزيت ناقل لتخفيف الزيوت الأساسية ولتدليك الأطفال. مفيد لتحسين البشرة الجافة وتقليل الهالات السوداء.",
+                usage: [
+                    "التدليك: يستخدم كقاعدة لزيوت التدليك",
+                    "العناية بالبشرة: يدهن على الوجه كمرطب ليلي",
+                    "للهالات: يدلك به منطقة تحت العين بلطف",
+                    "للأطفال: آمن للاستخدام على بشرة الأطفال الرضع"
+                ],
+                warnings: "آمن بشكل عام. تجنبه إذا كنت تعاني من حساسية المكسرات. احفظه في مكان بارد ومظلم.",
+                tags: ["skin", "health", "relax"]
+            },
+            {
+                id: 14,
+                name: "زيت اللوز المر",
+                nameEn: "Bitter Almond Oil",
+                category: "carrier",
+                categoryLabel: "زيت حامل",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/13fc4842b-ebbf-4ec4-857f-fec3189a3751.png",
+                benefits: "يستخدم غالباً لرائحته المميزة وفي العطور. مشهور في بعض الثقافات لتفتيح البشرة وتوحيد لونها.",
+                usage: [
+                    "للبشرة: يستخدم مخففاً جداً على البشرة",
+                    "للعطور: يضاف إلى خلطات العطور الطبيعية",
+                    "للتدليك: يخفف مع زيوت أخرى"
+                ],
+                warnings: "⚠️ تحذير هام: زيت اللوز المر غير صالح للاستهلاك الداخلي لاحتوائه على حمض البروسيك (سيانيد). حتى للاستخدام الموضعي، يجب أن يكون خالياً من هذا الحمض (منزوع السيانيد) ومخففاً جداً، والأفضل شراؤه من مصادر موثوقة ومخصص للاستخدام الجلدي فقط.",
+                tags: ["skin"]
+            },
+            {
+                id: 15,
+                name: "زيت حبة البركة (الحبة السوداء)",
+                nameEn: "Black Seed Oil",
+                category: "carrier",
+                categoryLabel: "زيت نباتي",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/1e32157e2-6d8a-4cc6-b14c-1a88b19fb95c.png",
+                benefits: "مقوي لمناعة الجسم، مضاد للالتهابات، مضاد للهيستامين (مفيد للحساسية). يستخدم داخلياً (ملعقة صغيرة) لدعم الصحة العامة، وخارجياً لعلاج مشاكل الجلد مثل الإكزيما والصدفية وحب الشباب.",
+                usage: [
+                    "داخلياً: ملعقة صغيرة يومياً (يمكن خلطها مع العسل)",
+                    "موضعياً: يدلك على المفاصل الملتهبة أو مناطق الإكزيما",
+                    "للشعر: يضاف إلى الشامبو أو يستخدم كقناع",
+                    "للحساسية: تؤخذ بانتظام خلال موسم الحساسية"
+                ],
+                warnings: "قد يخفض سكر الدم، احذر إذا كنت تتناول أدوية السكري. غير مناسب للحوامل بكميات كبيرة. قد يتفاعل مع أدوية ضغط الدم.",
+                tags: ["health", "skin", "hair"]
+            },
+            {
+                id: 16,
+                name: "زيت الخروع",
+                nameEn: "Castor Oil",
+                category: "carrier",
+                categoryLabel: "زيت نباتي",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/10dec6a7f-640a-4c61-a04c-58e7f4c4c841.png",
+                benefits: "ملين قوي (يؤخذ داخلياً بحذر شديد وتحت إشراف). معروف بقدرته على ترطيب الشعر وتطويله وتكثيف الحواجب والرموش. يستخدم موضعياً لتخفيف آلام المفاصل والعضلات وعلاج الالتهابات الجلدية.",
+                usage: [
+                    "للشعر: يدهن على فروة الرأس ويترك لساعات قبل الغسيل",
+                    "للرموش: يدهن على الرموش بفرشاة نظيفة قبل النوم",
+                    "كمادات: توضع كمادات زيت الخروع الدافئة على البطن لتخفيف الإمساك أو على الكبد لإزالة السموم",
+                    "للمفاصل: يدلك به المناطق المؤلمة"
+                ],
+                warnings: "ثقيل القوام، قد يسد المسام. غير مناسب للوجه الدهني. لا يستخدم داخلياً دون إشراف طبي.",
+                tags: ["hair", "skin", "pain"]
+            },
+            {
+                id: 17,
+                name: "زيت الزيتون",
+                nameEn: "Olive Oil",
+                category: "carrier",
+                categoryLabel: "زيت نباتي",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/14407ff0b-5caf-46b6-99bd-6e2e165cc66a.png",
+                benefits: "غني بمضادات الأكسدة والفيتامينات. مفيد لصحة القلب عند تناوله. يستخدم موضعياً لترطيب البشرة الجافة جداً والشعر، وإزالة الشوائب، والعناية بالأظافر.",
+                usage: [
+                    "للشعر: حمام زيت دافئ قبل غسل الشعر",
+                    "للبشرة: مزيل طبيعي للمكياج",
+                    "للأظافر: ينقع الأظافر فيه لتقويتها",
+                    "داخلياً: يستخدم في الطهي والسلطات"
+                ],
+                warnings: "آمن بشكل عام. اختر زيت الزيتون البكر الممتاز للحصول على أفضل الفوائد.",
+                tags: ["skin", "hair", "health"]
+            },
+            {
+                id: 18,
+                name: "زيت البقدونس",
+                nameEn: "Parsley Oil",
+                category: "other",
+                categoryLabel: "زيت آخر",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/1ff4be362-e807-47f1-a4cd-bf15288a8b19.png",
+                benefits: "مدر للبول، يساعد في تنظيف الكلى والتخلص من السموم. ينشط الدورة الدموية. مفيد لتخفيف انتفاخ البطن وتنظيم الدورة الشهرية. غني بمضادات الأكسدة.",
+                usage: [
+                    "داخلياً: غالباً ما يؤخذ بجرعات صغيرة (قطرات) بعد استشارة مختص",
+                    "موضعياً: يستخدم مخففاً لعلاج الكدمات",
+                    "للبشرة: يضاف إلى مستحضرات العناية بالبشرة"
+                ],
+                warnings: "غير مناسب للحوامل بكميات كبيرة. قد يسبب حساسية للشمس. خفف دائماً قبل الاستخدام على البشرة.",
+                tags: ["health", "skin"]
+            },
+            {
+                id: 19,
+                name: "زيت الجرجير",
+                nameEn: "Watercress Oil",
+                category: "other",
+                categoryLabel: "زيت آخر",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/1a05432a5-6808-418c-b95b-9ce0d31f8317.png",
+                benefits: "غني جداً بالفيتامينات (A, C) والمعادن (الحديد، اليود). مقوي للشعر ويمنع تساقطه، منشط للجسم، ومفيد للبشرة.",
+                usage: [
+                    "للشعر: يخلط مع زيت ناقل ويدلك على فروة الرأس",
+                    "داخلياً: قد يؤخذ بجرعات صغيرة جداً كمكمل غذائي",
+                    "للبشرة: يضاف إلى مستحضرات العناية"
+                ],
+                warnings: "قد يسبب تهيجاً للبشرة الحساسة. اختبره على منطقة صغيرة أولاً. للاستخدام الخارجي فقط.",
+                tags: ["hair", "skin", "health"]
+            },
+            {
+                id: 20,
+                name: "زيت القرنفل",
+                nameEn: "Clove Oil",
+                category: "other",
+                categoryLabel: "زيت آخر",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/13ac4f497-46cf-4c01-baa9-4a4a271ca8cc.png",
+                benefits: "مسكن ومخدر موضعي قوي. أشهر استخداماته هي لتسكين ألم الأسنان واللثة. مضاد للبكتيريا والفطريات.",
+                usage: [
+                    "لألم الأسنان: توضع قطرة على قطنة وتوضع على مكان الألم (يسبب حرقة خفيفة). يجب عدم بلعه",
+                    "للفم: يضاف إلى غسول الفم الطبيعي",
+                    "موضعياً: يخفف ويستخدم كمطهر"
+                ],
+                warnings: "⚠️ قوي جداً، لا يستخدم غير مخفف على الجلد. غير مناسب للأطفال. لا يستخدم لفترات طويلة. تجنب البلع.",
+                tags: ["pain", "health"]
+            },
+            {
+                id: 21,
+                name: "زيت الخردل",
+                nameEn: "Mustard Oil",
+                category: "other",
+                categoryLabel: "زيت آخر",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/1f83a11b3-b2d0-4d01-b39c-b354720aabb4.png",
+                benefits: "دافئ ومنشط للدورة الدموية. يستخدم في تدليك العضلات والمفاصل لتخفيف الآلام والروماتيزم. يستخدم في بعض المطابخ للطهي.",
+                usage: [
+                    "التدليك: يدلك به الجسم قبل الاستحمام بماء دافئ لتنشيط الدورة الدموية",
+                    "لآلام المفاصل: يسخن قليلاً ويدلك على المنطقة المؤلمة",
+                    "للشعر: يخلط مع زيوت أخرى كقناع"
+                ],
+                warnings: "قد يسبب تهيجاً للجلد الحساس. اختبره أولاً. رائحته قوية. غير مناسب للاستخدام على الوجه.",
+                tags: ["pain", "health"]
+            },
+            {
+                id: 22,
+                name: "زيت الكتان",
+                nameEn: "Flaxseed Oil",
+                category: "other",
+                categoryLabel: "زيت آخر",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/14407ff0b-5caf-46b6-99bd-6e2e165cc66a.png",
+                benefits: "أغنى مصدر نباتي لأوميغا-3 (حمض ألفا لينولينيك). مفيد جداً لصحة القلب والدماغ، يخفض الكوليسترول، يحسن البشرة الجافة، ويساعد في حالات الإمساك.",
+                usage: [
+                    "داخلياً: يؤخذ ملعقة صغيرة إلى ملعقة كبيرة يومياً مع الطعام (السلطات مثلاً)",
+                    "للبشرة: يستخدم كمرطب عميق",
+                    "للشعر: يضاف إلى أقنعة الشعر"
+                ],
+                warnings: "⚠️ لا يستخدم للقلي لأنه يتأثر بالحرارة العالية. يتأكسد بسرعة، احفظه في الثلاجة. لا تستخدمه بعد انتهاء الصلاحية.",
+                tags: ["health", "skin", "hair"]
+            },
+            {
                 id: 23,
                 name: "زيت الحلبة",
+                nameEn: "Fenugreek Oil",
+                category: "other",
+                categoryLabel: "زيت آخر",
                 image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/182759ba8-8f93-4860-8241-054a393e0b6e.png",
-                benefits: "زيت الحلبة منشط للنمو ومغذي عميق. يحفز نمو الشعر ويمنع تساقطه، يغذي البشرة ويحارب الجفاف. يساعد في زيادة إدرار الحليب للأمهات المرضعات. ينظم سكر الدم، مضاد للالتهابات ومفيد لصحة المفاصل.",
+                benefits: "معروف بقدرته على تعزيز إدرار الحليب للمرضعات. مفيد للشعر (تقوية ومنع التساقط)، يخفض سكر الدم، ومضاد للالتهابات.",
                 usage: [
-                    "للشعر: دلك فروة الرأس واتركه ساعة قبل الغسل",
-                    "للبشرة: امزج مع زيت ناقل واستخدمه كمرطب",
-                    "للإرضاع: استشر الطبيب للاستخدام الداخلي",
-                    "للمفاصل: دلك المنطقة بالزيت الدافئ"
+                    "للشعر: يدهن على فروة الرأس",
+                    "داخلياً: قد تؤخذ كبسولات زيت الحلبة أو تنقع البذور وتشرب",
+                    "للبشرة: يخلط مع زيوت أخرى كمرطب"
                 ],
-                warnings: "غير مناسب للحوائل بكميات كبيرة. قد يخفض سكر الدم. استشر الطبيب إذا كنت تتناول أدوية السكري.",
-                tags: ["skin", "health"]
+                warnings: "غير مناسب للحوامل بكميات كبيرة. قد يخفض سكر الدم. استشر الطبيب إذا كنت تتناول أدوية السكري.",
+                tags: ["hair", "health", "skin"]
+            },
+            {
+                id: 24,
+                name: "زيت الحنظل",
+                nameEn: "Colocynth Oil",
+                category: "other",
+                categoryLabel: "زيت آخر",
+                image: "https://image.qwenlm.ai/public_source/b18fc531-4985-49af-a0cd-bd800b9a07e3/138af5d5d-ebc6-406b-94e7-25bf289fffa4.png",
+                benefits: "يستخدم في بعض الوصفات التقليدية (خاصة في المنطقة العربية) لتساقط الشعر وتطويله وتكثيفه. يعتقد أنه منشط قوي لفروة الرأس.",
+                usage: [
+                    "للشعر: يستخدم بحذر شديد على فروة الرأس",
+                    "موضعياً: فقط تحت إشراف مختص"
+                ],
+                warnings: "⚠️ تحذير شديد الخطورة: سام جداً إذا تم تناوله داخلياً ويجب الحذر الشديد في استخدامه موضعياً. قد يسبب تهيجاً جلدياً شديداً وتقرحات. الأفضل استشارة مختص قبل التفكير في استخدامه.",
+                tags: ["hair"]
             }
         ];
 
@@ -848,11 +1323,19 @@
 
         // Tag labels mapping
         const tagLabels = {
-            'skin': 'جلد وشعر',
-            'health': 'صحة عامة',
-            'digestive': 'هضم',
-            'relax': 'استرخاء',
-            'pain': 'تسكين آلام'
+            'skin': 'للجلد',
+            'hair': 'للشعر',
+            'health': 'للصحة',
+            'digestive': 'للهضم',
+            'relax': 'للاسترخاء',
+            'pain': 'للآلام'
+        };
+
+        // Category labels
+        const categoryLabels = {
+            'essential': { label: 'زيت عطري أساسي', class: 'essential' },
+            'carrier': { label: 'زيت حامل', class: 'carrier' },
+            'other': { label: 'زيت آخر', class: 'other' }
         };
 
         // Render Products
@@ -860,10 +1343,19 @@
             productsGrid.innerHTML = '';
             
             // Update count
-            productCount.textContent = `عرض ${items.length} من ${products.length} منتج`;
+            productCount.innerHTML = `عرض <span>${items.length}</span> من <span>${products.length}</span> منتج`;
             
             if (items.length === 0) {
-                productsGrid.innerHTML = '<div class="no-results">لا توجد نتائج مطابقة لبحثك</div>';
+                productsGrid.innerHTML = `
+                    <div class="no-results">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35"/>
+                        </svg>
+                        <p>لا توجد نتائج مطابقة لبحثك</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">جرب كلمات بحث مختلفة أو غير الفلتر</p>
+                    </div>
+                `;
                 return;
             }
 
@@ -872,19 +1364,27 @@
                 card.className = 'product-card';
                 card.onclick = () => openModal(product);
                 
+                const catInfo = categoryLabels[product.category];
                 const tagsHtml = product.tags.map(tag => 
                     `<span class="tag">${tagLabels[tag] || tag}</span>`
                 ).join('');
 
                 card.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-badge ${catInfo.class}">${catInfo.label}</div>
+                    <div class="product-image-container">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                    </div>
                     <div class="product-info">
+                        <div class="product-category">${product.categoryLabel}</div>
                         <h3 class="product-title">${product.name}</h3>
                         <p class="product-benefits">${product.benefits}</p>
                         <div class="product-tags">
                             ${tagsHtml}
                         </div>
-                        <button class="view-details-btn">عرض التفاصيل</button>
+                        <button class="view-details-btn">
+                            <span>عرض التفاصيل الكاملة</span>
+                            <span>←</span>
+                        </button>
                     </div>
                 `;
                 productsGrid.appendChild(card);
@@ -895,9 +1395,10 @@
         function openModal(product) {
             document.getElementById('modalImage').src = product.image;
             document.getElementById('modalImage').alt = product.name;
+            document.getElementById('modalCategory').textContent = product.categoryLabel;
             document.getElementById('modalTitle').textContent = product.name;
             document.getElementById('modalBenefits').textContent = product.benefits;
-            document.getElementById('modalWarnings').textContent = product.warnings;
+            document.getElementById('modalWarnings').innerHTML = product.warnings;
             
             // Tags
             const tagsContainer = document.getElementById('modalTags');
@@ -929,10 +1430,19 @@
             const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
 
             const filtered = products.filter(product => {
-                const matchesSearch = product.name.includes(searchTerm) || 
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
                                      product.benefits.includes(searchTerm) ||
-                                     product.usage.some(u => u.includes(searchTerm));
-                const matchesFilter = activeFilter === 'all' || product.tags.includes(activeFilter);
+                                     product.nameEn.toLowerCase().includes(searchTerm) ||
+                                     product.usage.some(u => u.toLowerCase().includes(searchTerm));
+                
+                let matchesFilter = true;
+                if (activeFilter !== 'all') {
+                    if (['essential', 'carrier', 'other'].includes(activeFilter)) {
+                        matchesFilter = product.category === activeFilter;
+                    } else {
+                        matchesFilter = product.tags.includes(activeFilter);
+                    }
+                }
                 
                 return matchesSearch && matchesFilter;
             });
